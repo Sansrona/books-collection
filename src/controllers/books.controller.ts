@@ -13,7 +13,6 @@ export class BooksController {
     async getAllBooks (req: Request, res: Response) {
         const books = await this.booksService.getAllBooks();
         res.send(books);
-        res.send(books);
     }
     async getBookById(req: Request, res: Response) {
         const bookId = req.params.bookId;

@@ -34,7 +34,6 @@ let BooksController = class BooksController {
         return __awaiter(this, void 0, void 0, function* () {
             const books = yield this.booksService.getAllBooks();
             res.send(books);
-            res.send(books);
         });
     }
     getBookById(req, res) {
