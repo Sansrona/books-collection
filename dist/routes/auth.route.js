@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRouter = void 0;
+const express_1 = require("express");
+const bearer_auth_middleware_1 = require("../middlewares/bearer-auth.middleware");
+const users_validation_middleware_1 = require("../middlewares/users-validation.middleware");
+const root_1 = require("../compositionRoots/root");
+const auth_controller_1 = require("../controllers/auth.controller");
+exports.authRouter = (0, express_1.Router)();
+const authController = root_1.myContainer.get(auth_controller_1.AuthController);
+exports.authRouter.post('/login', users_validation_middleware_1.AuthValidationMiddlewares, authController.login.bind(authController));
+exports.authRouter.post('/registration-confirmation', authController.registrationConfirmation.bind(authController));
+exports.authRouter.post('/register', users_validation_middleware_1.UsersValidationMiddlewares, authController.registration.bind(authController));
+exports.authRouter.get('/me', bearer_auth_middleware_1.globalBearerAuthMiddleware, authController.getMe.bind(authController));
+exports.authRouter.put('/:userId/role', users_validation_middleware_1.UsersRoleValidationMiddlewares, authController.updateUserRole.bind(authController));
